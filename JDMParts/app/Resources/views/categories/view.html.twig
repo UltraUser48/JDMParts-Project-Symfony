@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="container-fluid text-center bg-grey">
+    <div class="row text-center">
+        <div class="col-sm-4">
+            <div class="thumbnail" >
+                <img src="{{ asset('bundles/app/images/slide1.png') }}" alt="Paris">
+                <p><strong>Engine Parts</strong></p>
+                <p>Choose between thousands of parts for your JDM Engine</p>
+                <p><a href=/category/2>ViewOffers</a></p>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="thumbnail">
+                <img src="{{ asset('bundles/app/images/exterior.jpg') }}" alt="New York">
+                <p><strong>Exterior</strong></p>
+                <p>Spoilers and tunner stuff</p>
+                <p><a href=/category/5>ViewOffers</a></p>
+
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="thumbnail">
+                <img src="{{ asset('bundles/app/images/interior.jpg') }}" alt="San Francisco">
+                <p><strong>Interior</strong></p>
+                <p>Leather and Sport seats</p>
+                <p><a href=/category/4>ViewOffers</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid text-center bg-grey">
+    <div class="row text-center">
+    <div class="col-sm-4">
+        <div class="thumbnail" >
+            <img src="{{ asset('bundles/app/images/suspension.jpg') }}" alt="Paris">
+            <p><strong>Suspension</strong></p>
+            <p>Coil Overs , Red springs</p>
+            <p><a href=/category/6>ViewOffers</a></p>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="thumbnail" id="engine">
+            <img src="{{ asset('bundles/app/images/wheels.jpg') }}" alt="Paris">
+            <p><strong>Wheels</strong></p>
+            <p>Thousands of shoes for your lady</p>
+            <p><a href=/category/1>ViewOffers</a></p>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="thumbnail">
+            <img src="{{ asset('bundles/app/images/exhaust.jpg') }}" alt="San Francisco">
+            <p><strong>Exhaust</strong></p>
+            <p>Hear the real sound of your engine</p>
+            <p><a href=/category/3>ViewOffers</a></p>
+        </div>
+    </div>
+    </div>
+    </div>
+    {% stylesheets 'bundles/app/css/cate.css' filter='cssrewrite' %}
+ <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+
+{% endblock %}

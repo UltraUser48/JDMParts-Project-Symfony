@@ -1,0 +1,32 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    {% if error %}
+        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    <form action="{{ path('user_check') }}" method="post">
+
+        <div class="container">
+
+            <form class="form-signin">
+                <h1  id="headinga" class="form-signin-heading text-muted" style="color: #f6f6f6">Sign In</h1>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="_username" value="{{ last_username }}" />
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="_password" />
+                <button type="submit">login</button>
+                </button>
+            </form>
+
+        </div>
+
+
+    </form>
+    {% stylesheets 'bundles/app/css/s.css' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Promotions List</h1>
+
+
+    <div class="container">
+        <h2>Every Promotion available in the System</h2>
+        <p>Create or Edit Promotions</p>
+        <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Percent</th>
+                <th>Category</th>
+                <th>Startdate</th>
+                <th>Enddate</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for promotion in promotions %}
+            <tr>
+                <td>{{ promotion.percent }}</td>
+                <td>{{ promotion.category.name }}</td>
+
+                <td>{% if promotion.startDate %}{{ promotion.startDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if promotion.endDate %}{{ promotion.endDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('promotion_show', { 'id': promotion.id }) }}"type="button" class="btn btn-info" >Show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('promotion_edit', { 'id': promotion.id }) }}"type="button" class="btn btn-danger" >Edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('promotion_new') }}"type="button" class="btn btn-info" >New</a></td>
+        </li>
+    </ul>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3">Welcome to JDMParts!</h1>
+            <p>One of the world's largest online websites for Japaneese Car Parts </p>
+            <p><a class="btn btn-primary btn-lg" href="/about" role="button">Learn more &raquo;</a></p>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1 style="color: white">Latest News</h1>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <a href="/w3images/lights.jpg" target="_blank">
+                        <img src="{{ asset('bundles/app/images/Nissan Logo-500x500.jpg') }}" alt="Lights" style="width:100%">
+                        <div class="caption">
+                            <p>Find out about Nissan 1.5L Engine that outputs 400 hp and can fit in your left pocket</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <a href="/w3images/nature.jpg" target="_blank">
+                        <img src="{{ asset('bundles/app/images/supranews.jpg') }}" alt="Nature" style="width:100%">
+                        <div class="caption">
+                            <p>Nothing new! another 1000WHP Supra</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <a href="/w3images/fjords.jpg" target="_blank">
+                        <img src="{{ asset('bundles/app/images/rb26.jpg') }}" alt="Fjords" style="width:100%">
+                        <div class="caption">
+                            <p>Top 10 JDM Engines of all time!</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+{% block stylesheets%}
+{% stylesheets 'bundles/app/css/whole.css' filter='cssrewrite' %}
+<link rel="stylesheet" href="{{ asset_url }}" />
+{% endstylesheets %}
+{% endblock %}

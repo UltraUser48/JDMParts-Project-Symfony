@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>All Offers
+        {% if app.user == is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('project_new') }}" class="btn btn-default">
+            Create a Offer
+        </a>
+        {% endif %}</h1>
+
+    <form action="{{ path('cart_add') }}">
+    {% for project in projects %}
+        <div class="container" style="margin-top:50px;">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="col-item">
+                        <div class="post-img-content">
+                            <img src="/images/project/{{ project.image }}" class="img-responsive" />
+                            <span class="post-title">
+                        <b>{{ project.category.name }}</b><br>
+                                <div class="container">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Product Description</h3>
+                    <span class="pull-right">
+                        <!-- Tabs -->
+
+                    </span>
+                </div>
+                <div class="panel-body">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab1">{{ project.description }}</div>
+                </div>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+
+                    </span>
+                            <span class="round-tag">Sale</span>
+                        </div>
+                        <div class="info">
+                            <div class="row">
+                                <div class="price col-md-6">
+                                    <h5>{{ project.title }}</h5>
+                                </div>
+                                <div class="rating hidden-sm col-md-6">
+                                    <h5 class="price-text-color"> {%  set project_promotion = calc.calculate(project) %}
+
+                                        {% if project_promotion != project.price %}
+                                            <del>{{ project.price | number_format(2) }}</del><br />
+                                        {% endif %}
+                                        {{ project_promotion | number_format(2) }}€</h5>
+                                </div>
+                            </div>
+                            <div class="separator clear-left">
+                                <p class="btn-add">
+                                    <i class="fa fa-shopping-cart"></i><a href="#" class="hidden-sm">To add to the shopping Cart Check the Box </a></p>
+                                <p>
+
+                                    <input type="checkbox" value="{{ project.id }}" name="projects[]"/>
+                                </p>
+                                <p class="btn-details">
+                                    <i class="fa fa-list"></i><a href="{{ path('project_show',{ 'id': project.id }) }}" class="hidden-sm">More details</a></p>
+                                <p>In Stock: {{ project.stock.count }}</p>
+                            </div>
+                            <div class="clearfix">
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    {% endfor %}
+
+        <button type="submit">Add to Cart</button>
+    </form>
+
+    <footer>
+    <div class="navigation text-center">
+        {{ knp_pagination_render(projects) }}
+    </div>
+    </footer>
+    {% stylesheets 'bundles/app/css/index.css' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}

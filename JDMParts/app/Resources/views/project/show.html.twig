@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ project.title }}</h1>
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-4">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <img src="/images/project/{{ project.image }}" style="width: 250px;" class="img-rounded" alt="Cinque Terre" width="210" height="210">
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-md-8">
+                <div class="product-desc">Active since: {% if project.dateCreated %}{{ project.dateCreated|date('Y-m-d H:i:s') }}{% endif %}</div>
+                <div class="product-desc">Last Updated: {% if project.dateUpdated %}{{ project.dateUpdated|date('Y-m-d H:i:s') }}{% endif %}</div>
+                <div class="product-desc">Contact: {{ project.phone }}</div>
+                <div class="product-desc">Location: {{ countries[project.country] }}</div>
+                <hr>
+                <div class="product-price">{%  set project_promotion = calc.calculate(project) %}
+
+                    {% if project_promotion != project.price %}
+                        <del>{{ project.price | number_format(2) }}</del><br />
+                    {% endif %}
+                    {{ project_promotion | number_format(2) }}€</h5>
+                </div></div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-tabs nav_tabs">
+                <li class="active"><a href="#service-one" data-toggle="tab">DESCRIPTION</a>
+                  <h4>{{ project.description }}</h4>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+
+    </div>
+    </div>
+    <ul>
+        <li>
+            <a href="{{ path('project_index') }}"type="button" class="btn btn-info" >Back to The List</a>
+        </li>
+        <li>
+            <a href="{{ path('project_edit', { 'id': project.id }) }}"type="button" class="btn btn-danger" >Edit</a>
+        </li>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+            <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+
+
+{% endblock %}

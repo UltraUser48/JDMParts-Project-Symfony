@@ -1,0 +1,77 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <ta class="col-sm-12 col-md-10 col-md-offset-1">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th class="text-center">Price</th>
+                        <th class="text-center">Price With Discount%</th>
+                        <th> </th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for cart_product in cart.cartProjects %}
+                        <tr>
+                            <td class="col-sm-8 col-md-6">
+                                <div class="media">
+                                    <a class="thumbnail pull-left" href="#"> <img class="media-object" src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/72/product-icon.png" style="width: 72px; height: 72px;"> </a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading"><a href="#">{{ cart_product.project.title }}</a></h4>
+                                        <h5 class="media-heading"> Description <a href="#">{{ cart_product.project.description }}</a></h5>
+                                        <span>Status: </span><span class="text-success"><strong>In Stock</strong></span>
+                                    </div>
+                                </div></td>
+                            <td class="col-sm-1 col-md-1 text-center"><strong>{{ cart_product.project.price }}</strong></td>
+                            <td class="col-sm-1 col-md-1 text-center"><strong>{%  set project_promotion = calc.calculate(cart_product.project) %}
+                                    {{ project_promotion | number_format(2) }}</strong></td>
+                            <td class="col-sm-1 col-md-1">
+
+                                <a href="/cart/remove" ><button type="button" class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-remove"></span> Remove
+                                    </button></a></td>
+                        </tr>
+
+                    {% endfor %}
+                    {% for cart_project in cartprojects %}
+
+                        <table>
+                        Qty :<input type="email" class="form-control" id="exampleInputEmail1" value="{{ cart_project.qty}}">
+                        </table>
+                    {% endfor %}
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+                         {% for cart_project in cartprojects %}
+                     {% for cart_product in cart.cartProjects %}
+                                 <td><h3>Total</h3></td>
+                                 <td class="text-right"><h3><strong>${{ cart_project.qty * cart_product.project.price}}</strong></h3></td>
+                     {% endfor %}
+                         {% endfor %}
+                    </tr>
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>
+                            <a href="/project/" ><button type="button"  class="btn btn-default">
+                                <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
+                                </button></a></td>
+                        <td>
+                           <a href="{{ path('cart_checkout') }}" ><button type="button" class="btn btn-success">
+                                Checkout <span class="glyphicon glyphicon-play"></span>
+                               </button></a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

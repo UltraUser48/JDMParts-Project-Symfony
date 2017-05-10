@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 style="color: white">Welcome to JDMParts!</h1>
+    <h3 style="color: ghostwhite">The largest online shop for Japanese Domestic Market Car Parts</h3>
+
+
+    {% stylesheets 'bundles/app/css/about.css' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+
+{% endblock %}
+
