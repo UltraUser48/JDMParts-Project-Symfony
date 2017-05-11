@@ -29,6 +29,9 @@ security:
                 path: user_logout
 
     access_control:
+        - { path: ^/cartproject/view, roles: [ ROLE_ADMIN, ROLE_SADMIN] }
+        - { path: ^/cart/bought, roles: [ ROLE_ADMIN, ROLE_SADMIN] }
+        - { path: ^/promotion, roles: [ ROLE_ADMIN, ROLE_SADMIN] }
         - { path: ^/about , roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin , roles: [ROLE_SADMIN] }
         - { path: ^/register , roles: IS_AUTHENTICATED_ANONYMOUSLY }
@@ -36,5 +39,4 @@ security:
         - { path: ^/project/manage, roles: [ ROLE_ADMIN, ROLE_SADMIN] }
         - { path: ^/, roles: [ROLE_USER, ROLE_ADMIN, ROLE_SADMIN] }
         - { path: ^/cart/bought, roles: [ ROLE_ADMIN, ROLE_SADMIN] }
-        - { path: ^/promotion, roles: [ ROLE_ADMIN, ROLE_SADMIN] }
 

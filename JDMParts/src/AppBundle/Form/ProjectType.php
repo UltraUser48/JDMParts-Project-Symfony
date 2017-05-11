@@ -46,7 +46,7 @@ class ProjectType extends AbstractType
                 ] )
                 ->add('phone', TextType::class)
                 ->add('deadline', DateType::class)
-                ->add('stock', TextType::class);
+                ->add('price',TextType::class);
     }
 
     /**

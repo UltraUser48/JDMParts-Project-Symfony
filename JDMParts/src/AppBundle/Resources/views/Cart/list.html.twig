@@ -16,7 +16,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for cart_product in cart.cartProjects %}
+                    {% for cart_product in cart.cartProjects  %}
                         <tr>
                             <td class="col-sm-8 col-md-6">
                                 <div class="media">
@@ -31,11 +31,14 @@
                             <td class="col-sm-1 col-md-1 text-center"><strong>{%  set project_promotion = calc.calculate(cart_product.project) %}
                                     {{ project_promotion | number_format(2) }}</strong></td>
                             <td class="col-sm-1 col-md-1">
+                        {% for cart_project in cartprojects %}
 
-                                <a href="/cart/remove" ><button type="button" class="btn btn-danger">
+                                <a href="{{ path('cartproject_delete', {'id': cart_project.id}) }}" ><button type="button" class="btn btn-danger">
                                     <span class="glyphicon glyphicon-remove"></span> Remove
                                     </button></a></td>
                         </tr>
+                     {% endfor %}
+
 
                     {% endfor %}
                     {% for cart_project in cartprojects %}
@@ -51,7 +54,9 @@
                          {% for cart_project in cartprojects %}
                      {% for cart_product in cart.cartProjects %}
                                  <td><h3>Total</h3></td>
-                                 <td class="text-right"><h3><strong>${{ cart_project.qty * cart_product.project.price}}</strong></h3></td>
+                         {%  set project_promotion = calc.calculate(cart_product.project) %}
+
+                                 <td class="text-right"><h3><strong> {{ project_promotion | number_format(2) * cart_project.qty}}$</strong></h3></td>
                      {% endfor %}
                          {% endfor %}
                     </tr>

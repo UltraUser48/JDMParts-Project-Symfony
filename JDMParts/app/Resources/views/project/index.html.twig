@@ -6,6 +6,11 @@
         <a href="{{ path('project_new') }}" class="btn btn-default">
             Create a Offer
         </a>
+        {% endif %}
+        {% if app.user == is_granted('ROLE_SADMIN') %}
+            <a href="{{ path('project_new') }}" class="btn btn-default">
+                Create a Offer
+            </a>
         {% endif %}</h1>
 
     <form action="{{ path('cart_add') }}">

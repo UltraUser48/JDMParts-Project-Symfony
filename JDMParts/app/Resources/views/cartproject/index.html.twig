@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>All of the bought items and their Quantities</h1>
+
+
+    <div class="container">
+
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Product Id</th>
+                <th>Qty</th>
+                <th>Bellongs to Cart#</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for cartProject in cartProjects %}
+                <tr>
+                    <td><a href="#">{{ cartProject.id }}</a></td>
+                    <td>{{ cartProject.qty }}</td>
+                    <td>{{ cartProject.cart.id}}</td>
+
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -7,6 +7,7 @@ use AppBundle\Entity\Cart;
 use AppBundle\Entity\CartProject;
 use AppBundle\Entity\Project;
 use Doctrine\ORM\Mapping\Id;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -122,6 +123,7 @@ class CartController extends Controller
      * @Route("/cart/list", name="cart_list")
      * @Template()
      *
+     *
      */
     public function listAction(Request $request)
     {
@@ -132,7 +134,6 @@ class CartController extends Controller
         for ($i = 0; $i < count($cartprojects); $i++) {
             echo $cartprojects[$i]->getQty();
         }
-
 
 
         $calc = $this->get('price_calculator');
@@ -156,7 +157,7 @@ class CartController extends Controller
             'cartprojects'=>$cartprojects,
             'cart' => $cart,
             'max_promotion' => $max_promotion,
-            'calc' => $calc
+            'calc' => $calc,
         ];
     }
 
@@ -171,9 +172,6 @@ class CartController extends Controller
         $cart = $this->getDoctrine()->getRepository('AppBundle:Cart')->findBy(array('bought'=> true));
 
 
-
-
-
         return [
             'cart' => $cart,
 
@@ -182,38 +180,39 @@ class CartController extends Controller
 
 
     /**
-     * @Route("/cart/remove", name="cart_bought")
-     * @Template()
+     * Deletes a cartProject entity.
      *
+     * @Route("/{id}", name="cartprojects_delete")
+     * @Method("DELETE")
      */
-    public function RemoveAction(Request $request)
+    public function deleteAction(Request $request, CartProject $cartProject)
     {
-        $session = $this->get('session');
+        $form = $this->createDeleteForm($cartProject);
+        $form->handleRequest($request);
 
-        $cart = $this->getDoctrine()->getRepository('AppBundle:Cart')->find($session->get('id_cart', false));
-
-        $products = $request->get('projects');
-
-        foreach ($products as $id_project) {
-
-            $project = $this->getDoctrine()->getRepository('AppBundle:Project')->find($id_project);
-            $cart = $this->getDoctrine()->getRepository('AppBundle:Cart')->find($session->get('id_cart', false));
-
-            $cp = $this->getDoctrine()->getRepository('AppBundle:CartProject')->findOneBy([
-                'cart' => $cart,
-                'project' => $project
-            ]);
-
-            dump($cp);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($cartProject);
+            $em->flush();
         }
 
+        return $this->redirectToRoute('cart_list');
+    }
 
-
-
-        return [
-            'cart' => $cart,
-
-        ];
+    /**
+     * Creates a form to delete a cartProject entity.
+     *
+     * @param CartProject $cartProject The cartProject entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm(CartProject $cartProject)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('cartproject_delete', array('id' => $cartProject->getId())))
+            ->setMethod('DELETE')
+            ->getForm()
+            ;
     }
 
 }
